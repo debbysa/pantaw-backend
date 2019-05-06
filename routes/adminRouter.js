@@ -4,18 +4,16 @@ const con = require('../config/db')
 
 const adminController = require('../controller/AdminController')
 
+//route read
 router.get('/', adminController.index)
 
-router.post('/', function (req, res) {
-    res.send('menambahkan data admin')
-})
+//route create
+router.post('/', adminController.store)
 
-router.put('/{id}', function (req, res) {
-    res.send('mengubah data admin')
-})
+//route update
+router.put('/:id', adminController.update)
 
-// route create
-router.post('/admin', adminController.store)
-
+//route delete
+router.delete('/:id', adminController.destroy)
 
 module.exports = router

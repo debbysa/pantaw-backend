@@ -5,33 +5,29 @@ module.exports = {
 
     index: function (req, res) {
         Admin.findAll().then(function (rows) {
-            res.json('tampildata', {
+            res.json({
                 admin: rows
             })
         })
-        console.log();
     },
     store: function (req, res) {
-        Admin.create(req.body).then(function () {
-            res.redirect('/admin')
-        })
-    },
-    edit: function (req, res) {
-        Admin.findByPrimary(req.params.id).then(function (row) {
-            res.render('/admin/edit', { data: row })
+        Admin.create(req.body).then(function (rows) {
+            res.json({
+                admin: rows
+            })
         })
     },
 
     update: function (req, res) {
-        Admin.findByPrimary(req.params.id).then(function (row) {
+        Admin.findByPk(req.params.id).then(function (row) {
             row.update(req.body)
-            res.redirect('/admin')
+            res.redirect('/')
         })
     },
     destroy: function (req, res) {
-        Admin.findByPrimary(req.params.id).then(function (row) {
+        Admin.findByPk(req.params.id).then(function (row) {
             row.destroy()
-            res.redirect("/admin")
+            res.redirect('/')
         })
     },
     show: function (req, res) {

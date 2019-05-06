@@ -8,14 +8,12 @@ const methodOverride = require('method-override')
 //membuat middleware method Override
 app.use(methodOverride("_method"))
 
-// app.get('/', function (req, res) {
-//     res.send('GET request to the homepage')
-// })
-
 app.use(express.urlencoded({ extended: true }))
 
-// include router and routing
+// include router /admin
 app.use('/admin', require('./routes/adminRouter'))
+
+// include router /pemateri
 
 app.listen(3000, function () {
     console.log("server running")
