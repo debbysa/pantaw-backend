@@ -1,14 +1,7 @@
 const express = require('express')
-const path = require('path')
 const app = express()
 
-//import method override
-const methodOverride = require('method-override')
-
-//membuat middleware method Override
-app.use(methodOverride("_method"))
-
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 // include router /admin
 app.use('/admin', require('./routes/adminRouter'))
