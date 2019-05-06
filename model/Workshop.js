@@ -20,7 +20,7 @@ const Workshop = sequelize.define(
             type: Sequelize.INTEGER
         }
     },
-    { timestamps: false }
+    { timestamps: false, tableName: "workshop" }
 );
 
 Workshop.belongsTo(Pemateri, { foreignKey: 'id_pemateri' })

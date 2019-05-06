@@ -19,6 +19,6 @@ const Pemateri = sequelize.define(
             type: Sequelize.STRING(50)
         }
     },
-    { timestamps: false }
+    { timestamps: false, tableName: "pemateri" }
 );
 module.exports = Pemateri

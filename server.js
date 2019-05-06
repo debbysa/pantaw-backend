@@ -7,6 +7,13 @@ app.use(express.json())
 app.use('/admin', require('./routes/adminRouter'))
 
 // include router /pemateri
+app.use('/pemateri', require('./routes/pemateriRouter'))
+
+// include router /workshop
+app.use('/workshop', require('./routes/workshopRouter'))
+
+//include router /status
+app.use('/status', require('./routes/statusRouter'))
 
 app.listen(3000, function () {
     console.log("server running")

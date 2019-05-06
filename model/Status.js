@@ -19,6 +19,6 @@ const Status = sequelize.define(
             type: Sequelize.STRING(100)
         }
     },
-    { timestamps: false }
+    { timestamps: false, tableName: "status" }
 );
-module.exports = Pemateri
+module.exports = Status

@@ -1,34 +1,35 @@
 const Workshop = require('../model/Workshop')
-const path = require('path')
 
 module.exports = {
-    index: function (req, res) {
+
+    show: function (req, res) {
         Workshop.findAll().then(function (rows) {
-            res.render('tampildata', {
-                Workshop: rows
-            })
+            res.json(rows)
         })
     },
+
+    index: function (req, res) {
+        Workshop.findByPk(req.params.id).then(function (row) {
+            res.json(row)
+        })
+    },
+
     store: function (req, res) {
-        Workshop.create(req.body).then(function () {
-            res.redirect("/workshop")
+        Workshop.create(req.body).then(function (rows) {
+            res.json(rows)
         })
     },
-    edit: function (req, res) {
-        Workshop.findByPrimary(req.params.id).then(function (row) {
-            res.render("workshop/edit", { data: row })
-        })
-    },
+
     update: function (req, res) {
-        Workshop.findByPrimary(req.params.id).then(function (row) {
+        Workshop.findByPk(req.params.id).then(function (row) {
             row.update(req.body)
-            res.redirect("/workshop")
+            res.json(row)
         })
     },
     destroy: function (req, res) {
-        Workshop.findByPrimary(req.params.id).then(function (row) {
+        Workshop.findByPk(req.params.id).then(function (row) {
             row.destroy()
-            res.redirect("/workshop")
+            res.json(row)
         })
     }
 }

@@ -1,5 +1,4 @@
 const Admin = require('../model/Admin')
-const path = require('path')
 
 module.exports = {
 
@@ -8,6 +7,7 @@ module.exports = {
             res.json(rows)
         })
     },
+
     store: function (req, res) {
         Admin.create(req.body).then(function (rows) {
             res.json(rows)
@@ -25,5 +25,5 @@ module.exports = {
             row.destroy()
             res.json(row)
         })
-    },
+    }
 }
