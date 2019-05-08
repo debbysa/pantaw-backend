@@ -11,6 +11,9 @@ const Detail_workshop = sequelize.define(
             primaryKey: true,
             autoIncrement: true
         },
+        id_peserta: {
+            type: Sequelize.INTEGER
+        },
         id_workshop: {
             type: Sequelize.INTEGER
         },
@@ -18,10 +21,10 @@ const Detail_workshop = sequelize.define(
             type: Sequelize.INTEGER
         }
     },
-    { timestamps: false }
+    { timestamps: false, tableName: "detail_workshop" }
 );
 
-Detail_workshop.belongsTo(Workshop, { foreignKey: 'id_workshop' })
+// Detail_workshop.belongsTo(Workshop, { foreignKey: 'id_workshop' })
 Detail_workshop.belongsTo(Status, { foreignKey: 'id_status' })
 
 module.exports = Detail_workshop

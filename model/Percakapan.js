@@ -23,10 +23,10 @@ const Percakapan = sequelize.define(
             type: Sequelize.DATE
         }
     },
-    { timestamps: false }
+    { timestamps: false, tableName: "percakapan" }
 );
 
-Percakapan.belongsTo(Workshop, { foreignKey: 'id_workshop' })
+// Percakapan.belongsTo(Workshop, { foreignKey: 'id_workshop' })
 // Detail_workshop.belongsTo(Peserta, { foreignKey: 'id_peserta' })
 
 module.exports = Percakapan
