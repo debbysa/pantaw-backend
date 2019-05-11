@@ -36,13 +36,8 @@ module.exports = {
   },
 
   storePercakapan: function(req, res) {
+    req.body.id_workshop = req.params.id;
     Percakapan.create(req.body).then(function(row) {
-      res.json(row);
-    });
-  },
-
-  storeDetail: function(req, res) {
-    DetailWorkshop.create(req.body).then(function(row) {
       res.json(row);
     });
   },
@@ -55,7 +50,7 @@ module.exports = {
   },
 
   updateDetail: function(req, res) {
-    DetailWorkshop.findByPk(req.params.id).then(function(row) {
+    DetailWorkshop.findByPk(req.params.id_detail).then(function(row) {
       row.update(req.body);
       res.json(row);
     });
@@ -63,13 +58,6 @@ module.exports = {
 
   destroy: function(req, res) {
     Workshop.findByPk(req.params.id).then(function(row) {
-      row.destroy();
-      res.json(row);
-    });
-  },
-
-  destroyDetail: function(req, res) {
-    DetailWorkshop.findByPk(req.params.id).then(function(row) {
       row.destroy();
       res.json(row);
     });

@@ -1,19 +1,20 @@
-const express = require("express")
-const router = express.Router()
-const con = require("../config/db")
+const express = require("express");
+const router = express.Router();
+const statusController = require("../controller/StatusController");
+const verifyToken = require("../middleware/verifyToken");
 
-const statusController = require("../controller/StatusController")
+router.use(verifyToken);
 
 //router read
-router.get('/', statusController.index)
+router.get("/", statusController.index);
 
 //router create
-router.post('/', statusController.store)
+router.post("/", statusController.store);
 
 //router update
-router.put('/:id', statusController.update)
+router.put("/:id", statusController.update);
 
 //router delete
-router.delete('/:id', statusController.destroy)
+router.delete("/:id", statusController.destroy);
 
-module.exports = router
+module.exports = router;

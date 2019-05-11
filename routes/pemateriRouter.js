@@ -1,19 +1,19 @@
-const express = require("express")
-const router = express.Router()
-const con = require("../config/db")
+const express = require("express");
+const router = express.Router();
+const pemateriController = require("../controller/PemateriController");
+const verifyToken = require("../middleware/verifyToken");
 
-const pemateriController = require("../controller/PemateriController")
+//route create untuk registrasi
+router.post("/", pemateriController.store);
+
+router.use(verifyToken);
 
 //router read
-router.get('/', pemateriController.index)
-
-//route create
-router.post('/', pemateriController.store)
-
+router.get("/", pemateriController.index);
 //route update
-router.put('/:id', pemateriController.update)
+router.put("/:id", pemateriController.update);
 
 //route delete
-router.delete('/:id', pemateriController.destroy)
+router.delete("/:id", pemateriController.destroy);
 
-module.exports = router
+module.exports = router;
