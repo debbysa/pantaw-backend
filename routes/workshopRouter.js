@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const workshopController = require("../controller/WorkshopController");
+const detailWorkshopController = require("../controller/DetailWorkshopController");
+const percakapanController = require("../controller/PercakapanController");
 const verifyToken = require("../middleware/verifyToken");
 
 router.use(verifyToken);
 
 //router read
 router.get("/", workshopController.index);
+router.get("/:id", workshopController.show);
 
 //router create workshop
 router.post("/", workshopController.store);
@@ -18,15 +21,15 @@ router.put("/:id", workshopController.update);
 router.delete("/:id", workshopController.destroy);
 
 //router read data percakapan
-router.get("/:id/percakapan", workshopController.showPercakapan);
+router.get("/:id/percakapan", percakapanController.index);
 
 //router create percakapan workshop
-router.post("/:id/percakapan", workshopController.storePercakapan);
+router.post("/:id/percakapan", percakapanController.store);
 
 // router detail workshop
-router.get("/:id/detail", workshopController.show);
+router.get("/:id/detail", detailWorkshopController.index);
 
 //router update detail workshop
-router.put("/:id/detail/:id_detail", workshopController.updateDetail);
+router.put("/:id/detail/:id_detail", detailWorkshopController.update);
 
 module.exports = router;
