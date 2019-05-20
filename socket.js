@@ -1,28 +1,30 @@
 const Percakapan = require("./model/Percakapan");
 const DetailWorkshop = require("./model/Detail_workshop");
+const Status = require("./model/Status");
+const jwt = require("jsonwebtoken");
 
 module.exports = function(socket) {
   socket.on("percakapan", function(data) {
     Percakapan.create(data).then(function(row) {
-      socket.emit("percakapan", row);
+      socket.broadcast.emit("percakapan", row);
     });
   });
 
-  socket.on("status", function(data) {
-    const { id_detail_workshop } = data;
-    DetailWorkshop.findByPk(id_detail_workshop).then(function(row) {
-      row.update(data);
-      socket.emit("status", row);
+  socket.on("detail", function(id_workshop) {
+    DetailWorkshop.findAll({
+      where: { id_workshop },
+      include: { model: Status }
+    }).then(function(rows) {
+      rows = rows.map(row => {
+        row.id_peserta = jwt.verify(row.id_peserta, "randomStuff");
+        return row;
+      });
+
+      socket.broadcast.emit("detail", rows);
     });
   });
 
-  socket.on("peserta", function(id_workshop) {
-    DetailWorkshop.findAll({ where: { id_workshop } }).then(function(rows) {
-      socket.emit("peserta", rows);
-    });
-  });
-
-  socket.on("timer", function(time) {
-    socket.emit("timer", time);
+  socket.on("task", function(task) {
+    socket.broadcast.emit("task", task);
   });
 };

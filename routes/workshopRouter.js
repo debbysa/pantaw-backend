@@ -5,7 +5,7 @@ const detailWorkshopController = require("../controller/DetailWorkshopController
 const percakapanController = require("../controller/PercakapanController");
 const verifyToken = require("../middleware/verifyToken");
 
-router.use(verifyToken);
+// router.use(verifyToken);
 
 //router read
 router.get("/", workshopController.index);
@@ -31,5 +31,8 @@ router.get("/:id/detail", detailWorkshopController.index);
 
 //router update detail workshop
 router.put("/:id/detail/:id_detail", detailWorkshopController.update);
+
+// router reset status detail workshop
+router.patch("/:id/detail/resetStatus", detailWorkshopController.resetStatus);
 
 module.exports = router;

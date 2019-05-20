@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+const cors = require("cors");
 
 app.use(express.json());
+app.use(cors());
 
 // include router /admin
 app.use("/admin", require("./routes/adminRouter"));
