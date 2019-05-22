@@ -14,6 +14,9 @@ const Detail_workshop = sequelize.define(
     id_peserta: {
       type: Sequelize.STRING
     },
+    peserta: {
+      type: Sequelize.VIRTUAL
+    },
     id_workshop: {
       type: Sequelize.INTEGER
     },
