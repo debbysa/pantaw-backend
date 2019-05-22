@@ -1,12 +1,23 @@
 const Percakapan = require("./model/Percakapan");
+const Pemateri = require("./model/Pemateri");
 const DetailWorkshop = require("./model/Detail_workshop");
 const Status = require("./model/Status");
 const jwt = require("jsonwebtoken");
 
-module.exports = function(socket) {
-  socket.on("percakapan", function(data) {
-    Percakapan.create(data).then(function(row) {
-      socket.broadcast.emit("percakapan", row);
+module.exports = function(io, socket) {
+  socket.on("percakapan", function(id_workshop) {
+    Percakapan.findAll({
+      where: { id_workshop },
+      include: { model: Pemateri },
+      order: [["id_percakapan", "ASC"]]
+    }).then(function(rows) {
+      rows.forEach(row => {
+        if (row.pemateri == null)
+          row.set("peserta", {
+            nama: jwt.verify(row.id_pengirim, "randomStuff")
+          });
+      });
+      io.sockets.emit("percakapan", rows);
     });
   });
 
@@ -15,9 +26,8 @@ module.exports = function(socket) {
       where: { id_workshop },
       include: { model: Status }
     }).then(function(rows) {
-      rows = rows.map(row => {
-        row.id_peserta = jwt.verify(row.id_peserta, "randomStuff");
-        return row;
+      rows.forEach(row => {
+        row.set("peserta", { nama: jwt.verify(row.id_peserta, "randomStuff") });
       });
 
       socket.broadcast.emit("detail", rows);
@@ -26,5 +36,9 @@ module.exports = function(socket) {
 
   socket.on("task", function(task) {
     socket.broadcast.emit("task", task);
+  });
+
+  socket.on("resetStatus", function() {
+    socket.broadcast.emit("resetStatus");
   });
 };
