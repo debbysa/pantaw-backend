@@ -24,7 +24,7 @@ app.use("/autentikasi", require("./routes/autentikasiRouter"));
 
 // listen socket
 io.on("connection", function(socket) {
-  require("./socket")(socket);
+  require("./socket")(io, socket);
 });
 
 // start server
