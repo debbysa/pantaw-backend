@@ -9,9 +9,8 @@ module.exports = {
       where: { id_workshop: req.params.id },
       include: { model: Status }
     }).then(function(rows) {
-      rows = rows.map(row => {
-        row.id_peserta = jwt.verify(row.id_peserta, "randomStuff");
-        return row;
+      rows.forEach(row => {
+        row.set("peserta", { nama: jwt.verify(row.id_peserta, "randomStuff") });
       });
 
       res.json(rows);
