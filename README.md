@@ -1,6 +1,6 @@
 # :mag: PANTAW BACKEND
 
-Repo ini merupakan backend dari project Pantaw
+Repo ini merupakan backend dari project Pantaw yang dibangun menggunakan node js dan socket io untuk realtime chat.
 
 ## Tentang Pantaw
 
