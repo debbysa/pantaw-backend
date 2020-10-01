@@ -4,7 +4,7 @@ Repo ini merupakan backend dari project Pantaw yang dibangun menggunakan node js
 
 ## Tentang Pantaw
 
-Pantaw merupakan project yang dibuat untuk mempermudah pemateri dalam memonitoring peserta workshop IT (ngoding). Workshop disini adalah workshop tanpa modul, sehingga diperlukan bimbingan extra dari pemateri.
+Pantaw merupakan project yang dibuat untuk mempermudah pemateri dalam memonitoring peserta workshop IT (ngoding). Workshop disini adalah workshop tanpa modul, sehingga diperlukan bimbingan extra dari pemateri untuk memberikan ilmu kepada peserta.
 
 ## Fitur dalam Aplikasi :
 
